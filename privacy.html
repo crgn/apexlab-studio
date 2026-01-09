@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ApexLog Privacy Policy">
-  <title>Privacy Policy - ApexLog</title>
+  <meta name="description" content="Apex Log Privacy Policy">
+  <title>Privacy Policy - Apex Log</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,40 +14,269 @@
       <p class="privacy__updated">Last updated: December 2024</p>
       
       <div class="privacy__content">
-        <h2>Information We Collect</h2>
+        <h2>1. Introduction & App Overview</h2>
         <p>
-          When you sign up to be notified about ApexLog, we collect your email address. 
-          This is the only information we collect through this website.
+          Apex Lab Studio (Apex Log) ("we", "our", or "us") is a fitness and health tracking application designed to help users track workouts, fasting, step activity, and personalised fitness plans.
+        </p>
+        <p>
+          This Privacy Policy explains how we collect, use, store, and protect your information when you use the Apex Lab Studio (Apex Log) mobile application (the "App").
+        </p>
+        <p>
+          If you have any questions or concerns about this policy or your data, please contact us at:<br>
+          <strong>Privacy Contact Email:</strong> <a href="mailto:apexlabs.ops@gmail.com">apexlabs.ops@gmail.com</a>
         </p>
 
-        <h2>How We Use Your Information</h2>
+        <h2>2. Information We Collect</h2>
+        <h3>A. Account Information</h3>
+        <ul>
+          <li>Email address (used for authentication)</li>
+          <li>Password (securely hashed and managed via Supabase)</li>
+          <li>Display name</li>
+          <li>Account creation date</li>
+        </ul>
+
+        <h3>B. Health & Fitness Data</h3>
+        <ul>
+          <li>Physical metrics: weight, height, body fat percentage, age, biological sex</li>
+          <li>Step count data (from device sensors, where permitted)</li>
+          <li>Fasting data: start times, end times, and duration</li>
+          <li>Workout data, including:
+            <ul>
+              <li>Exercises performed</li>
+              <li>Sets, repetitions, weight, and RPE</li>
+              <li>Workout notes</li>
+              <li>Session start and end times</li>
+              <li>Workout programs and training plans</li>
+            </ul>
+          </li>
+          <li>Fitness preferences:
+            <ul>
+              <li>Fitness goals (e.g. weight loss, muscle gain)</li>
+              <li>Activity level and training experience</li>
+              <li>Equipment preferences</li>
+              <li>Preferred exercise types and focus muscle groups</li>
+              <li>Preferred training days and session duration</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>C. App Usage & Preferences</h3>
+        <ul>
+          <li>Measurement units (metric or imperial)</li>
+          <li>Colour theme selection</li>
+          <li>Theme mode (light or dark)</li>
+          <li>Timezone</li>
+        </ul>
+
+        <h3>D. Device Information</h3>
+        <ul>
+          <li>Device type and operating system version</li>
+          <li>App version</li>
+          <li>Network connectivity status (used to manage data synchronisation)</li>
+        </ul>
+
+        <h2>3. How We Collect Information</h2>
+        <h3>A. Information You Provide</h3>
+        <ul>
+          <li>Account registration and login</li>
+          <li>Profile setup</li>
+          <li>Manual workout and fasting entries</li>
+          <li>Preference and settings configuration</li>
+        </ul>
+
+        <h3>B. Information Collected Automatically</h3>
+        <ul>
+          <li>Step count data via device sensors (with permission)</li>
+          <li>HealthKit data on iOS (read-only, with permission)</li>
+          <li>Activity Recognition data on Android (with permission)</li>
+          <li>Local app usage analytics stored on-device</li>
+        </ul>
+
+        <h2>4. Permissions We Request</h2>
+        <h3>Android Permissions</h3>
+        <ul>
+          <li>ACTIVITY_RECOGNITION — step tracking</li>
+          <li>POST_NOTIFICATIONS — reminders and alerts</li>
+          <li>FOREGROUND_SERVICE / FOREGROUND_SERVICE_HEALTH — background step tracking</li>
+          <li>RECEIVE_BOOT_COMPLETED — restart tracking after device reboot</li>
+          <li>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS — prevent system termination of background services</li>
+        </ul>
+
+        <h3>iOS Permissions</h3>
+        <ul>
+          <li>HealthKit (Read-Only) — step count data</li>
+        </ul>
+
+        <p><strong>Note:</strong> All permissions are optional. Core functionality remains available without granting these permissions.</p>
+
+        <h2>5. How We Use Your Information</h2>
+        <p>We use your information to:</p>
+        <ul>
+          <li>Provide and operate the App's core features</li>
+          <li>Generate personalised workout and fitness recommendations</li>
+          <li>Sync data across devices (when enabled)</li>
+          <li>Send important service-related notifications</li>
+          <li>Improve app performance and reliability</li>
+          <li>Comply with legal and regulatory requirements</li>
+        </ul>
+        <p>We do not sell personal data and do not use your data for advertising.</p>
+
+        <h2>6. Data Storage & Security</h2>
+        <h3>Local Storage (On Device)</h3>
+        <ul>
+          <li>Stored using SQLite (via Drift)</li>
+          <li>Protected by device-level encryption</li>
+          <li>Includes:
+            <ul>
+              <li>User profile data</li>
+              <li>Workout, fasting, and step logs</li>
+              <li>Exercise library</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Cloud Storage</h3>
+        <ul>
+          <li>Data synchronised to Supabase (PostgreSQL)</li>
+          <li>Encrypted in transit using HTTPS/TLS</li>
+          <li>Encrypted at rest</li>
+          <li>Protected with Row Level Security (RLS)</li>
+          <li>Authentication handled using secure JWT tokens</li>
+        </ul>
+
+        <h3>Security Measures</h3>
+        <ul>
+          <li>Passwords are securely hashed</li>
+          <li>Secure authentication tokens</li>
+          <li>Strict database access controls</li>
+          <li>Regular security updates and maintenance</li>
+        </ul>
+
+        <h2>7. Third-Party Services</h2>
+        <h3>Supabase</h3>
+        <ul>
+          <li>Provides authentication, database, and data synchronisation</li>
+          <li>Privacy Policy: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">https://supabase.com/privacy</a></li>
+          <li>Data may be processed in the EU and/or US</li>
+        </ul>
+
+        <h3>Google Play Store / Apple App Store</h3>
+        <ul>
+          <li>App distribution and in-app purchases</li>
+          <li>Data related to subscriptions or transactions (if applicable in the future) may be handled by the respective store platforms</li>
+        </ul>
+
+        <h3>Google Fonts</h3>
+        <ul>
+          <li>Inter font used for typography</li>
+          <li>Fonts may be bundled locally to avoid external network requests</li>
+        </ul>
+
+        <h2>8. Data Sharing & Disclosure</h2>
+        <p>We do not sell personal data.</p>
+        <p>We only share data:</p>
+        <ul>
+          <li>With service providers necessary to operate the App (e.g. Supabase)</li>
+          <li>When required by law or legal process</li>
+          <li>In connection with a business transfer (merger, acquisition, or sale)</li>
+        </ul>
+        <p>Aggregated and anonymised data may be used for internal analytics and product improvement.</p>
+
+        <h2>9. Data Retention</h2>
+        <ul>
+          <li>Account data is retained while your account remains active</li>
+          <li>Health and fitness data is retained until account deletion</li>
+          <li>Deleted data is removed from active systems within 30 days</li>
+          <li>Backup data may persist for up to 90 days for recovery purposes</li>
+        </ul>
+
+        <h2>10. Your Rights & Choices</h2>
+        <h3>Access & Portability</h3>
+        <ul>
+          <li>View your data within the App</li>
+          <li>Export your data (where available)</li>
+        </ul>
+
+        <h3>Deletion</h3>
+        <ul>
+          <li>Delete your account via app settings</li>
+          <li>Contact support for assistance</li>
+        </ul>
+
+        <h3>Correction</h3>
+        <ul>
+          <li>Update profile information and preferences at any time</li>
+        </ul>
+
+        <h3>Opt-Out</h3>
+        <ul>
+          <li>Revoke sensor permissions via device settings</li>
+          <li>Disable cloud sync and use the App offline-only</li>
+        </ul>
+
+        <h3>Regional Rights</h3>
+        <ul>
+          <li>GDPR (EU): Right to access, rectify, erase, restrict, and port data</li>
+          <li>CCPA (California): Right to know, delete, and opt out of sale (we do not sell data)</li>
+          <li>Other regional rights apply where legally required</li>
+        </ul>
+
+        <h2>11. Children's Privacy</h2>
         <p>
-          We use your email address solely to send you updates about ApexLog, including 
-          launch announcements and relevant product information. We do not share your email 
-          address with third parties.
+          Apex Lab Studio (Apex Log) is not intended for children under:
+        </p>
+        <ul>
+          <li>13 years of age (United States)</li>
+          <li>16 years of age (European Union)</li>
+        </ul>
+        <p>We do not knowingly collect data from children. If such data is discovered, it will be deleted promptly.</p>
+
+        <h2>12. International Data Transfers</h2>
+        <p>
+          Your data may be processed in the United States, the European Union, or other regions where our service providers operate. Appropriate safeguards, such as Standard Contractual Clauses, are used where required.
         </p>
 
-        <h2>Data Storage</h2>
+        <h2>13. Offline-First Architecture</h2>
+        <p>Apex Lab Studio (Apex Log) is designed to work offline:</p>
+        <ul>
+          <li>Data is stored locally first</li>
+          <li>Cloud sync occurs only when online</li>
+          <li>You control when synchronisation is enabled</li>
+        </ul>
+
+        <h2>14. Changes to This Privacy Policy</h2>
         <p>
-          Your email address is stored securely through Formspree, our form submission service. 
-          You can review Formspree's privacy policy for more information about how they handle data.
+          We may update this policy periodically. Updates will be posted in-app and/or on our website.
+        </p>
+        <p>
+          Material changes will be communicated via email or in-app notification. Continued use of the App after updates constitutes acceptance.
         </p>
 
-        <h2>Your Rights</h2>
-        <p>
-          You can unsubscribe from our emails at any time by clicking the unsubscribe link 
-          in any email we send, or by contacting us directly.
-        </p>
+        <h2>15. Contact Information</h2>
+        <ul>
+          <li><strong>Privacy Inquiries:</strong> <a href="mailto:apexlabs.ops@gmail.com">apexlabs.ops@gmail.com</a></li>
+          <li><strong>Data Protection Officer:</strong> Not Applicable</li>
+          <li><strong>Mailing Address:</strong> Not Provided</li>
+        </ul>
 
-        <h2>Contact Us</h2>
-        <p>
-          If you have any questions about this Privacy Policy, please contact us through 
-          the email form on our main page.
-        </p>
+        <h2>16. App Store Disclosure Notes</h2>
+        <h3>Google Play Store</h3>
+        <ul>
+          <li>Data Safety section fully disclosed</li>
+          <li>Permissions clearly explained</li>
+          <li>Third-party services transparently listed</li>
+        </ul>
+
+        <h3>Apple App Store</h3>
+        <ul>
+          <li>App Privacy details completed</li>
+          <li>Privacy Nutrition Labels accurately filled</li>
+          <li>HealthKit usage clearly described (read-only step data)</li>
+        </ul>
       </div>
 
       <p class="privacy__back">
-        <a href="index.html" class="privacy__link">← Back to ApexLog</a>
+        <a href="index.html" class="privacy__link">← Back to Apex Log</a>
       </p>
     </section>
   </main>
@@ -56,7 +285,7 @@
     <p class="footer__text">
       <a href="privacy.html" class="footer__link">Privacy Policy</a>
     </p>
-    <p class="footer__copyright">&copy; 2024 ApexLog. All rights reserved.</p>
+    <p class="footer__copyright">&copy; 2024 Apex Log. All rights reserved.</p>
   </footer>
 </body>
 </html>

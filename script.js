@@ -145,17 +145,14 @@
       }
     }
 
-    // Auto-advance (optional - can be removed if not desired)
-    // let autoAdvanceInterval;
-    // function startAutoAdvance() {
-    //   autoAdvanceInterval = setInterval(nextSlide, 5000);
-    // }
-    // function stopAutoAdvance() {
-    //   clearInterval(autoAdvanceInterval);
-    // }
-    // carousel.addEventListener('mouseenter', stopAutoAdvance);
-    // carousel.addEventListener('mouseleave', startAutoAdvance);
-    // startAutoAdvance();
+    // Pause carousel on hover for better UX
+    let isHovering = false;
+    carousel.addEventListener('mouseenter', () => {
+      isHovering = true;
+    });
+    carousel.addEventListener('mouseleave', () => {
+      isHovering = false;
+    });
 
     // Initialize
     updateCarousel();
@@ -215,7 +212,7 @@
         });
 
         if (response.ok) {
-          messageDiv.textContent = 'Thank you! We\'ll notify you when ApexLog launches.';
+          messageDiv.textContent = 'Thank you! We\'ll notify you when Apex Log launches.';
           messageDiv.className = 'form-message success';
           messageDiv.setAttribute('role', 'status');
           messageDiv.setAttribute('aria-live', 'polite');
