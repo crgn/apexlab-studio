@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ApexLog - Train smarter. Log less. A minimalist workout and fasting log for people who care about consistency, not clutter.">
+  <title>ApexLog - Train smarter. Log less.</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <div class="main-content">
+      <!-- Left Column: App Info and Form -->
+      <div class="content-column">
+        <!-- Hero Section -->
+        <section class="hero">
+          <h1 class="hero__title">ApexLog</h1>
+          <p class="hero__tagline">Train smarter. Log less.</p>
+        </section>
+
+        <!-- Explanation Section -->
+        <section class="explanation">
+          <p class="explanation__text">
+            ApexLog is a minimalist workout and fasting log for people who care about consistency, not clutter.
+            No feeds. No noise. Just the information you need to train better over time.
+          </p>
+        </section>
+
+        <!-- Email Capture Form -->
+        <section class="email-section">
+          <form class="email-form" action="https://formspree.io/f/meeoyyky" method="POST" id="emailForm">
+            <label for="email" class="sr-only">Your email address</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="email-input" 
+              placeholder="Enter your email"
+              required
+              aria-required="true"
+            >
+            <button type="submit" class="email-submit">Get notified when ApexLog launches</button>
+            <p class="email-consent">
+              We'll only use your email for ApexLog updates.
+              <a href="privacy.html" class="email-consent__link">View Privacy Policy</a>.
+            </p>
+            <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Right Column: Carousel -->
+      <div class="carousel-column">
+        <section class="carousel-section">
+          <div class="carousel-wrapper">
+            <div class="carousel-container" id="carousel" role="region" aria-label="App screenshots">
+              <div class="carousel-track" id="carouselTrack">
+                <!-- Screenshots: Add your images to the screenshots/ folder -->
+                <!-- Name them: screenshot-1.png, screenshot-2.png, etc. -->
+                <div class="carousel-item">
+                  <img src="screenshots/screenshot-1.png" alt="ApexLog app screenshot 1" class="carousel-image" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="screenshots/screenshot-2.png" alt="ApexLog app screenshot 2" class="carousel-image" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="screenshots/screenshot-3.png" alt="ApexLog app screenshot 3" class="carousel-image" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="screenshots/screenshot-4.png" alt="ApexLog app screenshot 4" class="carousel-image" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="screenshots/screenshot-5.png" alt="ApexLog app screenshot 5" class="carousel-image" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="carousel-nav">
+              <button class="carousel-arrow" id="carouselPrev" aria-label="Previous screenshot">‹</button>
+              <div class="carousel-dots" id="carouselDots" aria-hidden="true"></div>
+              <button class="carousel-arrow" id="carouselNext" aria-label="Next screenshot">›</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer__text">
+      <a href="privacy.html" class="footer__link">Privacy Policy</a>
+    </p>
+    <p class="footer__copyright">&copy; 2024 ApexLog. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
