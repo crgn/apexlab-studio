@@ -1,6 +1,6 @@
-# ApexLog Landing Page
+# Apex Log Landing Page
 
-A minimalist, crafted landing page for ApexLog - a fitness and fasting log app.
+A minimalist, crafted landing page for Apex Log - a fitness and fasting log app.
 
 ## Design Philosophy
 
@@ -79,4 +79,4 @@ The email form submits to Formspree. To change the endpoint, update the `action`
 
 ## License
 
-© 2024 ApexLog. All rights reserved.
+© 2024 Apex Log. All rights reserved.
