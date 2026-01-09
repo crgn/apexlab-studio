@@ -2,16 +2,22 @@
 :root {
   --color-bg: #fafafa;
   --color-text: #1a1a1a;
+  --color-text-light: #4a4a4a;
   --color-accent: #0066cc;
   --color-accent-hover: #0052a3;
   --color-border: #e5e5e5;
+  --color-border-focus: #0066cc;
   --color-placeholder: #999;
+  --color-success: #10b981;
+  --color-error: #ef4444;
   --max-width: 900px;
   --spacing-xs: 1rem;
   --spacing-sm: 2rem;
   --spacing-md: 4rem;
   --spacing-lg: 6rem;
   --spacing-xl: 8rem;
+  --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Reset & Base Styles */
