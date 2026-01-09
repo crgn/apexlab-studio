@@ -34,7 +34,7 @@ git branch -M main
 git push -u origin main
 ```
 
-### 4. Enable GitHub Pages
+### 4. Enable GitHub Pages 
 
 1. Go to your repository on GitHub
 2. Click **Settings** → **Pages**
