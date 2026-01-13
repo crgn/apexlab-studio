@@ -5,6 +5,60 @@
   // Remove no-js class if JavaScript is enabled
   document.documentElement.classList.remove('no-js');
 
+  // Load screenshots dynamically
+  async function loadScreenshots() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+
+    const extensions = ['png', 'jpeg'];
+    const maxScreenshots = 10;
+    const foundScreenshots = [];
+
+    // Helper function to check if an image exists
+    function checkImageExists(path) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = path;
+      });
+    }
+
+    // Check for screenshots 1-10
+    for (let i = 1; i <= maxScreenshots; i++) {
+      // Try both extensions
+      for (const ext of extensions) {
+        const path = `screenshots/screenshot-${i}.${ext}`;
+        const exists = await checkImageExists(path);
+        
+        if (exists) {
+          foundScreenshots.push({ number: i, path: path, extension: ext });
+          break; // Found this screenshot, move to next number
+        }
+      }
+    }
+
+    // Create carousel items for found screenshots
+    foundScreenshots.forEach((screenshot) => {
+      const item = document.createElement('div');
+      item.className = 'carousel-item';
+      
+      const img = document.createElement('img');
+      img.src = screenshot.path;
+      img.alt = `Apex Log app screenshot ${screenshot.number}`;
+      img.className = 'carousel-image';
+      img.loading = 'lazy';
+      
+      item.appendChild(img);
+      track.appendChild(item);
+    });
+
+    // Initialize carousel after screenshots are loaded
+    if (foundScreenshots.length > 0) {
+      initCarousel();
+    }
+  }
+
   // Initialize carousel
   function initCarousel() {
     const carousel = document.getElementById('carousel');
@@ -245,12 +299,12 @@
   // Initialize everything when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      initCarousel();
+      loadScreenshots();
       initAnimations();
       initForm();
     });
   } else {
-    initCarousel();
+    loadScreenshots();
     initAnimations();
     initForm();
   }
