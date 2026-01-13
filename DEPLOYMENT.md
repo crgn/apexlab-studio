@@ -34,12 +34,20 @@ git branch -M main
 git push -u origin main
 ```
 
-### 4. Enable GitHub Pages 
+### 4. Enable GitHub Pages (IMPORTANT - Do this FIRST!)
+
+**⚠️ You MUST enable GitHub Pages BEFORE the workflow can deploy successfully!**
 
 1. Go to your repository on GitHub
-2. Click **Settings** → **Pages**
-3. Under **Source**, select **GitHub Actions**
-4. The workflow will automatically deploy on the next push to `main`
+2. Click **Settings** (top menu bar)
+3. Click **Pages** (left sidebar)
+4. Under **Source**, select **GitHub Actions** (NOT "Deploy from a branch")
+5. Click **Save**
+6. You should see a message that Pages is enabled
+
+**After enabling Pages:**
+- The workflow will automatically re-run, OR
+- You can manually trigger it: Go to **Actions** tab → Select the failed workflow → Click **Re-run all jobs**
 
 ### 5. Verify Deployment
 
