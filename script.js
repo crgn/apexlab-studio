@@ -38,24 +38,36 @@
       }
     }
 
-    // Create carousel items for found screenshots
-    foundScreenshots.forEach((screenshot) => {
-      const item = document.createElement('div');
-      item.className = 'carousel-item';
-      
-      const img = document.createElement('img');
-      img.src = screenshot.path;
-      img.alt = `Apex Log app screenshot ${screenshot.number}`;
-      img.className = 'carousel-image';
-      img.loading = 'lazy';
-      
-      item.appendChild(img);
-      track.appendChild(item);
+    // Create carousel items for found screenshots and wait for images to load
+    const imageLoadPromises = foundScreenshots.map((screenshot) => {
+      return new Promise((resolve) => {
+        const item = document.createElement('div');
+        item.className = 'carousel-item';
+        
+        const img = document.createElement('img');
+        img.alt = `Apex Log app screenshot ${screenshot.number}`;
+        img.className = 'carousel-image';
+        img.loading = 'lazy';
+        
+        // Wait for image to load before resolving
+        img.onload = () => resolve();
+        img.onerror = () => resolve(); // Still resolve on error to not block
+        img.src = screenshot.path;
+        
+        item.appendChild(img);
+        track.appendChild(item);
+      });
     });
+
+    // Wait for all images to load before initializing carousel
+    await Promise.all(imageLoadPromises);
 
     // Initialize carousel after screenshots are loaded
     if (foundScreenshots.length > 0) {
-      initCarousel();
+      // Use requestAnimationFrame to ensure DOM is fully updated
+      requestAnimationFrame(() => {
+        initCarousel();
+      });
     }
   }
 
@@ -76,6 +88,11 @@
 
     let currentIndex = 0;
 
+    // Clear existing dots if any
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+    }
+
     // Create dots
     if (dotsContainer && itemCount > 1) {
       items.forEach((_, index) => {
@@ -90,28 +107,34 @@
     // Update carousel positions
     function updateCarousel() {
       items.forEach((item, index) => {
-        // Remove all position classes
+        // Remove all position classes and inline styles
         item.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
+        item.style.opacity = '';
+        item.style.pointerEvents = '';
         
-        const diff = index - currentIndex;
+        // Calculate circular distance (shortest path around the circle)
+        let diff = index - currentIndex;
+        // Normalize to the range [-itemCount/2, itemCount/2]
+        if (diff > itemCount / 2) {
+          diff -= itemCount;
+        } else if (diff < -itemCount / 2) {
+          diff += itemCount;
+        }
         
         if (diff === 0) {
           item.classList.add('active');
-        } else if (diff === -1 || (diff === itemCount - 1 && currentIndex === 0)) {
+        } else if (diff === -1) {
           item.classList.add('prev');
-        } else if (diff === 1 || (diff === -(itemCount - 1) && currentIndex === itemCount - 1)) {
+        } else if (diff === 1) {
           item.classList.add('next');
-        } else if (diff === -2 || (diff === itemCount - 2 && currentIndex <= 1)) {
+        } else if (diff === -2) {
           item.classList.add('far-prev');
-        } else if (diff === 2 || (diff === -(itemCount - 2) && currentIndex >= itemCount - 2)) {
+        } else if (diff === 2) {
           item.classList.add('far-next');
-        } else if (Math.abs(diff) > 2 && Math.abs(diff) < itemCount - 2) {
-          // Hide items that are too far away
+        } else {
+          // Hide items that are more than 2 positions away
           item.style.opacity = '0';
           item.style.pointerEvents = 'none';
-        } else {
-          item.style.opacity = '';
-          item.style.pointerEvents = '';
         }
       });
 
