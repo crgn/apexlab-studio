@@ -114,13 +114,16 @@
         
         // Calculate circular distance (shortest path around the circle)
         let diff = index - currentIndex;
-        // Normalize to the range [-itemCount/2, itemCount/2]
-        if (diff > itemCount / 2) {
+        
+        // Normalize to the shortest circular distance
+        // Handle wrapping around the circle - use >= and <= to handle exact boundaries
+        if (diff >= itemCount / 2) {
           diff -= itemCount;
-        } else if (diff < -itemCount / 2) {
+        } else if (diff <= -itemCount / 2) {
           diff += itemCount;
         }
         
+        // Assign classes based on distance from current item
         if (diff === 0) {
           item.classList.add('active');
         } else if (diff === -1) {
@@ -133,6 +136,7 @@
           item.classList.add('far-next');
         } else {
           // Hide items that are more than 2 positions away
+          // Use inline style to override CSS, but items will get classes again when they come back into range
           item.style.opacity = '0';
           item.style.pointerEvents = 'none';
         }
