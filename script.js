@@ -12,59 +12,71 @@
 
     const extensions = ['png', 'jpeg'];
     const maxScreenshots = 10;
-    const foundScreenshots = [];
 
-    // Helper function to check if an image exists
-    function checkImageExists(path) {
+    // Helper function to check if an image exists (preloads it for browser cache)
+    function checkAndPreloadImage(path) {
       return new Promise((resolve) => {
         const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = path;
+        img.onload = () => resolve({ exists: true, path: path });
+        img.onerror = () => resolve({ exists: false, path: path });
+        img.src = path; // This preloads the image into browser cache
       });
     }
 
-    // Check for screenshots 1-10
+    // Check all possible screenshots in parallel (much faster than sequential!)
+    const checkPromises = [];
     for (let i = 1; i <= maxScreenshots; i++) {
-      // Try both extensions
       for (const ext of extensions) {
         const path = `screenshots/screenshot-${i}.${ext}`;
-        const exists = await checkImageExists(path);
-        
-        if (exists) {
-          foundScreenshots.push({ number: i, path: path, extension: ext });
-          break; // Found this screenshot, move to next number
-        }
+        checkPromises.push(checkAndPreloadImage(path).then(result => ({
+          number: i,
+          ...result
+        })));
       }
     }
 
-    // Create carousel items for found screenshots and wait for images to load
-    const imageLoadPromises = foundScreenshots.map((screenshot) => {
-      return new Promise((resolve) => {
-        const item = document.createElement('div');
-        item.className = 'carousel-item';
-        
-        const img = document.createElement('img');
-        img.alt = `Apex Log app screenshot ${screenshot.number}`;
-        img.className = 'carousel-image';
-        img.loading = 'lazy';
-        
-        // Wait for image to load before resolving
-        img.onload = () => resolve();
-        img.onerror = () => resolve(); // Still resolve on error to not block
-        img.src = screenshot.path;
-        
-        item.appendChild(img);
-        track.appendChild(item);
-      });
+    // Wait for all checks to complete in parallel
+    const results = await Promise.all(checkPromises);
+
+    // Find the first existing image for each number (prefer png over jpeg)
+    const foundScreenshots = [];
+    const foundNumbers = new Set();
+    
+    // Sort results to prefer png over jpeg, then by number
+    results.sort((a, b) => {
+      if (a.number !== b.number) return a.number - b.number;
+      const aExt = a.path.split('.').pop();
+      const bExt = b.path.split('.').pop();
+      return aExt === 'png' ? -1 : 1;
     });
 
-    // Wait for all images to load before initializing carousel
-    await Promise.all(imageLoadPromises);
+    for (const result of results) {
+      if (result.exists && !foundNumbers.has(result.number)) {
+        foundScreenshots.push({
+          number: result.number,
+          path: result.path
+        });
+        foundNumbers.add(result.number);
+      }
+    }
 
-    // Initialize carousel after screenshots are loaded
+    // Create carousel items - images are already in browser cache from preload
+    foundScreenshots.forEach((screenshot) => {
+      const item = document.createElement('div');
+      item.className = 'carousel-item';
+      
+      const img = document.createElement('img');
+      img.alt = `Apex Log app screenshot ${screenshot.number}`;
+      img.className = 'carousel-image';
+      // No lazy loading - we want immediate display since images are preloaded
+      img.src = screenshot.path; // Uses cached version from preload - should be instant
+      
+      item.appendChild(img);
+      track.appendChild(item);
+    });
+
+    // Initialize carousel
     if (foundScreenshots.length > 0) {
-      // Use requestAnimationFrame to ensure DOM is fully updated
       requestAnimationFrame(() => {
         initCarousel();
       });
@@ -293,7 +305,7 @@
         });
 
         if (response.ok) {
-          messageDiv.textContent = 'Thank you! We\'ll notify you when Apex Log launches.';
+          messageDiv.textContent = 'Thank you! Your message has been sent.';
           messageDiv.className = 'form-message success';
           messageDiv.setAttribute('role', 'status');
           messageDiv.setAttribute('aria-live', 'polite');

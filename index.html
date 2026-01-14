@@ -42,8 +42,8 @@
 
         <!-- Email Capture Form -->
         <section class="email-section">
-          <form class="email-form" action="https://formspree.io/f/meeoyyky" method="POST" id="emailForm">
-            <label for="email" class="sr-only">Your email address</label>
+          <form class="email-form" action="https://formspree.io/f/xjggkvgw" method="POST" id="emailForm">
+            <label for="email">Your email:</label>
             <input 
               type="email" 
               id="email" 
@@ -53,7 +53,17 @@
               required
               aria-required="true"
             >
-            <button type="submit" class="email-submit">Get notified when Apex Log launches</button>
+            <label for="message">Your message:</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              class="email-input email-textarea"
+              placeholder="Enter your message"
+              rows="4"
+              required
+              aria-required="true"
+            ></textarea>
+            <button type="submit" class="email-submit">Send</button>
             <p class="email-consent">
               We'll only use your email for Apex Log updates.
               <a href="privacy.html" class="email-consent__link">View Privacy Policy</a>.
